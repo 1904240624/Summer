@@ -1,0 +1,22 @@
+/**********************三点顺序****************************/
+#include<stdio.h>
+#include<math.h> 
+int main(void)
+{
+	float x1,y1,x2,y2,x3,y3;
+	printf("Enter point A:");                          //输入三点坐标
+	scanf("%f%f",&x1,&y1);
+	printf("Enter point B:");
+	scanf("%f%f",&x2,&y2);
+	printf("Enter point C:");
+	scanf("%f%f",&x3,&y3);
+	if(x1==0&&y1==0&&x2==0&&y2==0&&x3==0&&y3==0)   //坐标均为0则不存在
+		printf("Not exit\n");
+	else
+	{
+		if((x2-x1)*(y3-y1)-(x3-x1)*(y2-y1)>0)            //利用矢量叉积判断顺序
+			printf("Ni Shi Zhen\n");
+		else
+			printf("Shun Shi Zhen\n");
+	}
+}
