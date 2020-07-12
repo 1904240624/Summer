@@ -1,0 +1,34 @@
+/**********************康托展开******************************/
+#include<stdio.h>
+#define N 5
+int f(int n);                                  //阶乘函数
+int main()
+{
+    int i,x,j,k,a[N];
+    x=0;
+    for(i=0;i<N;i++)
+    {
+        scanf("%d",a+i);
+    }
+    for(i=0;i<N;i++)
+    {
+        j=0;
+        for(k=i+1;k<N;k++)           //j为小于当前数的个数
+        {
+            if(a[i]>a[k])
+            j++;
+        }
+        x=x+f(N-i-1)*j;                 //康托展开累加
+    }
+    printf("%d",x);
+}
+int f(int n)                                //阶乘
+{
+    int i,sum;
+    sum=1;
+    for(i=1;i<=n;i++)
+    {
+        sum=sum*i;
+    }
+    return sum;
+}
