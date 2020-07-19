@@ -1,0 +1,15 @@
+/*****************同余定理******************************/
+#include<stdio.h>
+int main(void)
+{
+	int a,b,m;
+	printf("Enter m(m>0):");
+	scanf("%d",&m);
+	printf("Enter a and b:");
+	scanf("%d%d",&a,&b);
+	if((a-b)%m==0)                        //如果两个数同余  则两数之差对m取余为0
+		printf("Yes!\n");
+	else
+		printf("No!\n");
+
+}
