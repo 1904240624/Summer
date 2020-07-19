@@ -1,0 +1,68 @@
+/**********************逆康托展开******************************/
+#include<stdio.h>
+#define N 5
+int f(int n);
+int f1(int *p);
+int main()
+{
+    int i,x,j,k,l,a[N],b[N+1];
+    scanf("%d",&x);
+    for(i=1;i<=N;i++)
+    {
+        b[i]=1;
+    }
+    for(i=N-1,j=0;i>0;i--,j++)
+    {
+        a[j]=x/f(i);
+        x=x%f(i);
+    }
+    /*for(i=0;i<j;i++)
+    printf("%4d ",a[i]);
+    printf("\n");*/
+    for(i=0;i<j;i++)
+    {
+        l=0;
+        for(k=f1(b);k<=N;k++)
+        {
+            if(l==a[i])
+            {
+                if(b[k]==1)
+                {
+                    b[k]=0;
+                    printf("%d",k);
+                    break;
+                }
+            }
+            else
+                l++;
+        }
+    }
+    //printf("\n");
+    for(i=1;i<=N;i++)
+    {
+        if(b[i]==1)
+        printf("%d",i);
+    }
+}
+int f(int n)
+{
+    int i,sum;
+    sum=1;
+    for(i=1;i<=n;i++)
+    {
+        sum=sum*i;
+    }
+    return sum;
+}
+int f1(int *p)
+{
+    int i;
+    for(i=1;i<=N;i++)
+    {
+        if(p[i]==1)
+        {
+            return i;
+            break;
+        }
+    }
+}
