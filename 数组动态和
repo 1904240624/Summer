@@ -8,7 +8,7 @@ int* runningSum(int* nums, int numsSize, int* returnSize)
     for(i=0;i<numsSize;i++)
     {
         p[i]=0;
-        for(j=0;j<i+1;j++)
+        for(j=0;j<i+1;j++)         //利用动态和公式runningSum[i] = sum(nums[0]…nums[i])，建立一个指针用作求和
         {
             p[i]+=nums[j];
         }
