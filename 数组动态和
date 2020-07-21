@@ -1,0 +1,18 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* runningSum(int* nums, int numsSize, int* returnSize)
+{
+    int *p=(int *)malloc(sizeof(int)*numsSize);
+    int i,j;
+    for(i=0;i<numsSize;i++)
+    {
+        p[i]=0;
+        for(j=0;j<i+1;j++)
+        {
+            p[i]+=nums[j];
+        }
+    }
+    *returnSize=numsSize;
+    return p;
+}
