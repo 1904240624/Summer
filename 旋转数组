@@ -1,0 +1,13 @@
+void rotate(int* nums, int numsSize, int k)
+{
+    int t,i,j;
+    for(i=1;i<=k;i++)   //移动k个位置
+    {
+        t=nums[numsSize-1];//用t记下本次循环的最后一个元素
+        for(j=numsSize-1;j>=1;j--)//每次循环从后面的数字开始，让后面的等于前面的数字
+        {
+            nums[j]=nums[j-1];
+        }
+        nums[0]=t;//首个元素等于t
+    }
+}
