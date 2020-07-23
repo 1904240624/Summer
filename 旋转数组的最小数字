@@ -1,0 +1,13 @@
+int minArray(int* numbers, int numbersSize)
+{
+    int i,min;
+    min=numbers[0];//假设第一个元素最小，然后进入循环一一比较
+    for(i=0;i<numbersSize;i++)
+    {
+        if(numbers[i]<min)//当数组里的元素比min还要小的时候，就让min等于该元素
+        {
+            min=numbers[i];
+        }
+    }
+    return min;
+}
