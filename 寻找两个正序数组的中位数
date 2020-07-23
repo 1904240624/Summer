@@ -1,0 +1,72 @@
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
+{
+    int i,j,k,t,n,*p;
+    double result;
+    p=(int *)malloc(sizeof(int)*(nums1Size+nums2Size));//给指针分配空间，下面要用到
+    j=i=0;
+    n=nums1Size+nums2Size;  //n为两个数组大小之和
+    if(nums1Size==0)               //当nums1为空的时候，只有nums2
+    {
+        if(nums2Size%2==0)       //当nums2为偶数时，返回nums2中间两个数的平均值
+        {
+            result=(nums2[nums2Size/2]+nums2[(nums2Size/2)-1])/2.0;
+            return result;
+        }
+        else                               //为奇数时，返回最中间的数
+        {
+            result=nums2[nums2Size/2];
+            return result;
+        }
+    }
+    else if(nums2Size==0)       //同上
+    {
+        if(nums1Size%2==0)
+        {
+            result=(nums1[nums1Size/2]+nums1[(nums1Size/2)-1])/2.0;
+            return result;
+        }
+        else
+        {
+            result=nums1[nums1Size/2];
+            return result;
+        }
+    }
+    else//这种情况是两个数组都不为空
+    {
+        for(k=0;k<n;k++)//首先将两个数组nums1和nums2中的元素全部放到一个数组p里面
+        {
+            if(i<nums1Size)
+            {
+                p[k]=nums1[i];
+                i++;
+            }
+            else
+            {
+                p[k]=nums2[j];
+                j++;
+            }
+        }
+        for(i=1;i<n;i++)//再将数组p中的元素从小到大排列   (冒泡排序法)
+        {
+            for(j=0;j<n-i;j++)
+            {
+                if(p[j]>p[j+1])
+                {
+                    t=p[j];
+                    p[j]=p[j+1];
+                    p[j+1]=t;
+                }
+            }
+        }
+        if(n%2==0)//排序之后当n为偶数时，返回中间两个元素的平均值
+        {
+            result=(p[n/2]+p[n/2-1])/2.0;
+            return result;
+        }
+        else        //为奇数时返回最中间的元素
+        {
+            result=p[n/2];
+            return result;
+        }
+    }
+}
