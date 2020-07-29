@@ -1,0 +1,50 @@
+int firstMissingPositive(int* nums, int numsSize)
+{
+    int i,j,t;
+    if(numsSize==0)      //如果数组为空，则返回1
+    {
+        return 1;
+    }
+    for(i=1;i<numsSize;i++)    //冒泡排序法(从小到大排列)
+    {
+        for(j=0;j<numsSize-i;j++)
+        {
+            if(nums[j]>nums[j+1])
+            {
+                t=nums[j];
+                nums[j]=nums[j+1];
+                nums[j+1]=t;
+            }
+        }
+    }
+    if(nums[numsSize-1]<=0)    //如果数组最后一个元素小于0，则返回1
+    {
+        return 1;
+    }
+    for(i=0;i<numsSize;i++)   //寻找数组中最小的正数，并用j记住该数的位置
+    {
+        if(nums[i]>0)
+        {
+            j=i;
+            break;
+        }
+    }
+    i=1;
+    while(i)
+    {
+        if(i<nums[j])  //如果i小于当前数组元素中的最小正数，返回i
+        {
+            return i;
+            break;
+        }
+        else  //否则，数组nums往后移一位
+        {
+            i++;
+            j++;
+        }
+        if(j==numsSize)//当数组移到最后一个元素时，说明i比数组里任意元素都要大，返回i
+        {
+            return i;
+        }
+    }
+}
