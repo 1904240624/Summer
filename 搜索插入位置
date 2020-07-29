@@ -1,0 +1,44 @@
+int searchInsert(int* nums, int numsSize, int target)
+{
+    int i,j,t,n,result,flag,*p;
+    flag=0;
+    n=numsSize+1;
+    p=(int *)malloc(sizeof(int)*n);   //定义一个大小为numsSize+1的指针
+    for(i=0;i<numsSize;i++)
+    {
+        if(nums[i]==target)   //如果数组里有目标数，返回下标值，并令flag=1(说明数组里有目标数)
+        {
+            result=i;
+            flag=1;
+        }
+    }
+    if(flag!=1)    //如果flag不为1，即数组里没有目标数
+    {
+        for(i=0;i<numsSize;i++)  //让数组p和数组nums相同
+        {
+            p[i]=nums[i];
+        }
+        p[n-1]=target;     //让数组p最后一个元素等于目标数
+    }
+    for(i=1;i<n;i++)   //给数组p重新排序(从小到大)
+    {
+        for(j=0;j<n-i;j++)
+        {
+            if(p[j]>p[j+1])
+            {
+                t=p[j];
+                p[j]=p[j+1];
+                p[j+1]=t;
+            }
+        }
+    }
+    for(i=0;i<n;i++)  //遍历数组
+    {
+        if(p[i]==target)  //当其中的元素等于目标数时，返回其下标
+        {
+            result=i;
+            break;
+        }
+    }
+    return result;
+}
