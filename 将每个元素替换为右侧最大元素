@@ -1,0 +1,56 @@
+/*给你一个数组 arr ，请你将每个元素用它右边最大的元素替换，如果是最后一个元素，用 -1 替换。
+
+完成所有替换操作后，请你返回这个数组。
+
+ 
+
+示例：
+
+输入：arr = [17,18,5,4,6,1]
+输出：[18,6,6,6,1,-1]
+*/
+#include <stdio.h>
+#include<stdlib.h>
+#define N 6
+int fun(int *p,int n,int j);    //最大值函数
+int* replaceElements(int* arr, int arrSize);    //替换函数
+int main()
+{
+    int a[N]={17,18,5,4,6,1};
+    int *q;
+    int i;
+    q=(int *)malloc(sizeof(int)*N);
+    q=replaceElements(a,N);
+    for(i=0;i<N;i++) //遍历经过替换操作之后的数组
+    {
+        printf("%4d",q[i]);
+    }
+}
+int* replaceElements(int* arr, int arrSize)  //替换函数
+{
+    int i,t,*a;
+    a=(int *)malloc(sizeof(int)*arrSize);  //给指针a分配空间
+    for(i=0;i<arrSize;i++)   //让a与arr相等
+    {
+        a[i]=arr[i];
+    }
+    for(i=0;i<arrSize-1;i++)
+    {
+        arr[i]=fun(a,arrSize,i+1);    //让arr[i]等于其后面最大元素
+    }
+    arr[arrSize-1]=-1;  //数组arr最后一个元素为-1
+    return arr;
+}
+int fun(int *p,int n,int j)
+{
+    int i,max;
+    max=p[j];     //暂令p[j]为最大值
+    for(i=j;i<n;i++)    //逐一比较
+    {
+        if(max<p[i])   //如果p[i]比max还要大，就让max等于p[i]
+        {
+            max=p[i];
+        }
+    }
+    return max;
+}
