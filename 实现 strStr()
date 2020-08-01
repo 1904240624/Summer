@@ -1,0 +1,55 @@
+/*
+给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+
+示例 1:
+
+输入: haystack = "hello", needle = "ll"
+输出: 2
+示例 2:
+
+输入: haystack = "aaaaa", needle = "bba"
+输出: -1         */
+int strStr(char * haystack, char * needle)
+{
+    int i,j,t,flag,result;
+    if(strlen(needle)==0)  //needle为空，返回0
+    {
+        return 0;
+    }
+    if(strlen(haystack)<strlen(needle)) //如果haystack比needle小，则不存在
+    {
+        return -1;
+    }
+    i=j=flag=0;
+    while(haystack[i]!='\0')      //遍历haystack
+    {
+        j=0;
+        if(haystack[i]==needle[j])    //在haystack中寻找与needle首个元素相同的位置i
+        {
+            t=i+1;
+            result=i;     //result用来记住出现的第一个位置
+            flag=1;        //flag用来记住在i位置之后与needle中元素相同的个数
+            for(j=1;j<strlen(needle);j++)       //遍历needle
+            {
+                if(haystack[t]==needle[j])  //如果两个元素相同，flag++
+                {
+                    flag++;
+                }
+                t++;
+            }
+            if(flag==strlen(needle))  //如果flag和needle长度相同，说明haystack中存在needle字符串，退出循环
+            break;
+        }
+        i++;
+        if(i>strlen(haystack)-strlen(needle)) //如果i大于这两个字符串长度之差，则haystack中不可能有needle字符串，退出
+        break;
+    }
+    if(flag==strlen(needle))  //若相等，返回出现的第一个位置
+    {
+        return result;
+    }
+    else
+    {
+        return -1;
+    }
+}
