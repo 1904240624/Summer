@@ -1,0 +1,23 @@
+/*
+字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
+示例 1：
+
+输入: s = "abcdefg", k = 2
+输出: "cdefgab"
+*/
+char* reverseLeftWords(char* s, int n)
+{
+    int i,j;
+    char *p=(char *)malloc(sizeof(char)*2*strlen(s)+1);  //无论s怎样旋转，在两个s中一定可以找到旋转之后的字符串
+    strcpy(p,s); //将两个s拼接到p
+    strcat(p,s);
+    while(n>strlen(s)) //如果旋转次数n大于s长度，n需要减去s长度
+    {
+        n=n-strlen(s);
+    }
+    for(i=0;i<strlen(s);i++)    //让s[i]=p[i+n]
+    {
+        s[i]=p[i+n];
+    }
+    return s;
+}
