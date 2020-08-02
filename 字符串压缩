@@ -1,0 +1,58 @@
+/*字符串压缩。利用字符重复出现的次数，编写一种方法，实现基本的字符串压缩功能。比如，字符串aabcccccaaa会变为a2b1c5a3。若“压缩”后的字符串没有变短，则返回原先的字符串。
+你可以假设字符串中只包含大小写英文字母（a至z）。
+示例1:
+ 输入："aabcccccaaa"
+ 输出："a2b1c5a3"
+示例2:
+ 输入："abbccd"
+ 输出："abbccd"
+ 解释："abbccd"压缩后为"a1b2c2d1"，比原字符串长度更长。
+ */
+ char* compressString(char* S)
+{
+    char *p=(char *)malloc(sizeof(char)*(2*strlen(S)));
+    int i,j,flag,t;
+    char c[2];
+    i=t=0;
+    if(strlen(S)<=1)
+    {
+        return S;
+    }
+    while(S[i]!='\0')
+    {
+        flag=1;     //flag为在下一个不同于S[i]的字母之前与s[i]相同的个数
+        for(j=i+1;j<strlen(S);j++) //遍历i位置之后的数组
+        {
+            if(S[i]!=S[j])  //如果在i之后的元素和s[i]不同,并让flag等于新字母和s[i]位置的差值
+            {
+                flag=j-i;
+                break;
+            }
+            else  //如果有和s[i]相同的元素，flag++
+            {
+                flag++;
+            }
+        }
+        //printf("%c %d\n",S[i],flag);
+        sprintf(c,"%d",flag);  //把flag转换到字符型数组c的首个元素中，让p[t]和S[i]相同，让p[t+1]和S[i]的个数相同
+        p[t]=S[i];
+        p[t+1]=c[0];
+        if(flag==1)//flag=1，说明在i之后且在下一个字母之前没有与S[i]相同的元素了，那么i需要加1
+        {
+            i++;
+        }
+        else{  //如果有与S[i]相同的元素，i需要加flag
+            i+=flag;
+        }
+        t+=2;   //每次循环t都要加2
+    }
+    p[t]='\0';
+    if(t>=strlen(S))//t为数组p的大小
+    {
+        return S;
+    }
+    else
+    {
+        return p;
+    }
+}
