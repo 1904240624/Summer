@@ -1,0 +1,47 @@
+/*
+统计一个数字在排序数组中出现的次数。
+
+ 
+
+示例 1:
+
+输入: nums = [5,7,7,8,8,10], target = 8
+输出: 2
+示例 2:
+
+输入: nums = [5,7,7,8,8,10], target = 6
+输出: 0
+*/
+int search(int* nums, int numsSize, int target)
+{
+    int res,i=0,j=numsSize-1,mid,k;
+    res=0;
+    if(numsSize==0)
+    {
+        return res;
+    }
+    while(i<=j)  //利用二分法查找
+    {
+        mid=(i+j)/2;
+        if(nums[mid]==target)
+        {
+            for(k=mid-1;k>=i&&nums[k]==target;k--)   //向左查找
+            {
+                res++;
+            }
+            for(k=mid;k<=j&&nums[k]==target;k++)   //向右查找
+            {
+                res++;
+            }
+            break;
+        }
+        else if(nums[mid]<target)
+        {
+            i=mid+1;
+        }
+        else{
+            j=mid-1;
+        }
+    }
+    return res;
+}
