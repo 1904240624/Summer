@@ -1,0 +1,45 @@
+/*输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+
+ 
+
+示例 1：
+
+输入：head = [1,3,2]
+输出：[2,3,1]
+*/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* reversePrint(struct ListNode* head, int* returnSize)
+{
+    if(!head)     //判空
+    {
+        *returnSize=0;
+        return NULL;
+    }
+    struct ListNode *p=head;
+    int *a=(int *)malloc(sizeof(int )*10000);
+    int i=0;
+    while(p)     //遍历链表，求出链表长度i
+    {
+        p=p->next;
+        i++;
+    }
+    *returnSize=i;
+    p=head;
+    while(i--)   //再次遍历链表，将每个结点的值存入数组
+    {
+        a[i]=p->val;
+        p=p->next;
+    }
+    return a;
+}
