@@ -1,0 +1,63 @@
+/*编写一个函数，检查输入的链表是否是回文的。
+
+ 
+
+示例 1：
+
+输入： 1->2
+输出： false 
+示例 2：
+
+输入： 1->2->2->1
+输出： true     */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+bool isPalindrome(struct ListNode* head)
+{
+    struct ListNode *p=head,*q=head,*new=NULL;
+    struct ListNode *pre=(struct ListNode*)malloc(sizeof(struct ListNode));
+    int n=0,i;
+    while(p)  //遍历，求出链表的长度n
+    {
+        p=p->next;
+        n++;
+    }
+    if(n==1)  //如果长度为1，返回true
+    {
+        return true;
+    }
+    else
+    {
+        p=head;
+        i=0;
+        while(++i<=n/2)   //把原链表分为两份，p指向后半部分的起始节点
+        {
+            p=p->next;
+        }
+        while(p)   //把后半部分反转，反转后的头指针为new
+        {
+            pre=p;
+            p=p->next;
+            pre->next=new;
+            new=pre;
+        }
+        while(new)    //将后半部分与前半部分做比较
+        {
+            if(q->val!=new->val)
+            {
+                return false;
+            }
+            q=q->next;
+            new=new->next;
+        }
+    }
+    free(pre);
+    return true;
+}
