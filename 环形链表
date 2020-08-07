@@ -1,0 +1,36 @@
+/*给定一个链表，判断链表中是否有环。
+
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+ 
+
+示例 1：
+
+输入：head = [3,2,0,-4], pos = 1
+输出：true
+解释：链表中有一个环，其尾部连接到第二个节点。
+*/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool hasCycle(struct ListNode *head) 
+{
+    if(!head)     //判空
+    {
+        return false;
+    }
+    struct ListNode *p=head,*q=head;
+    while(p&&q&&p->next)  //快慢指针法，快指针走两步，慢指针走一步
+    {
+        p=p->next->next;
+        q=q->next;
+        if(p==q)  //如果该链表成环，那么p和q一定会相等
+        {
+            return true;
+        }
+    }
+    return false;
+}
