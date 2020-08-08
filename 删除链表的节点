@@ -41,11 +41,6 @@ struct ListNode* deleteNode(struct ListNode* head, int val)
     }
     while(p->next)  //遍历
     {
-        if(p->next->next==NULL&&p->next->val==val)  //尾部处理
-        {
-            p->next=NULL;
-            break;
-        }
         if(p->next->val==val)
         {
             p->next=p->next->next;
