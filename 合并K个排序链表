@@ -1,0 +1,61 @@
+/*
+合并 k 个排序链表，返回合并后的排序链表。
+
+示例:
+
+输入:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+输出: 1->1->2->3->4->4->5->6
+*/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize)
+{
+    struct ListNode *p=NULL,*head;
+    int i,val;
+    for(i=0;i<listsSize;i++)    //先将所有的有效链表连接到一个链表p上
+    {
+        if(lists[i])
+        {
+            head=lists[i];
+            while(head)
+            {
+                struct ListNode*pre=(struct ListNode*)malloc(sizeof(struct ListNode));
+                pre->next=NULL;
+                pre->val=head->val;
+                pre->next=p;               //头插法
+                p=pre;
+                head=head->next;
+            }
+        }
+    }
+    head=p;           //先用head记下头指针
+    while(p)            //再将链表p从小到大排序（选择排序法）
+    {
+        struct ListNode*q=p->next;
+        while(q)
+        {
+            if(q->val<p->val)
+            {
+                val=q->val;
+                q->val=p->val;
+                p->val=val;
+            }
+            q=q->next;
+        }
+        p=p->next;
+    }
+    p=head;    //再让p等于刚才的头指针
+    return p;
+}
