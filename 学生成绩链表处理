@@ -1,0 +1,81 @@
+/*本题要求实现两个函数，一个将输入的学生成绩组织成单向链表；另一个将成绩低于某分数线的学生结点从链表中删除。*/
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+struct stud_node {
+     int    num;
+     char   name[20];
+     int    score;
+     struct stud_node *next;
+};
+
+struct stud_node *createlist();
+struct stud_node *deletelist( struct stud_node *head, int min_score );
+
+int main()
+{
+    int min_score;
+    struct stud_node *p, *head = NULL;
+
+    head = createlist();
+    scanf("%d", &min_score);
+    head = deletelist(head, min_score);
+    for ( p = head; p != NULL; p = p->next )
+        printf("%d %s %d\n", p->num, p->name, p->score);
+
+    return 0;
+}
+
+/* 你的代码将被嵌在这里 */
+struct stud_node *createlist()
+{
+    struct stud_node*head,*tail;
+    int num;
+    char name[20];
+    int  score;
+    head=tail=NULL;
+    scanf("%d%s%d",&num,name,&score);
+    while(num)      //头插法建立链表
+    {
+        struct stud_node*pre=(struct stud_node*)malloc(sizeof(struct stud_node));   //动态分配一个节点
+        pre->next=NULL;
+        pre->num=num;
+        pre->score=score;
+        strcpy(pre->name,name);
+        if(!head)
+        {
+            head=pre;
+        }
+        else{
+            tail->next=pre;
+        }
+        tail=pre;
+        scanf("%d%s%d",&num,name,&score);
+    }
+    return head;  //返回头指针
+}
+struct stud_node *deletelist( struct stud_node *head, int min_score )
+{
+    struct stud_node*p=head,*newhead=NULL,*tail=NULL;;
+    while(p)   //遍历链表
+    {
+        if(p->score>=min_score)    //当节点值大于目标值时，就把节点接到新的链表中
+        {
+            if(!newhead)
+            {
+                newhead=p;
+            }
+            else{
+                tail->next=p;
+            }
+            tail=p;
+        }
+        if(p->next==NULL)      //新链表的尾部处理
+        {
+            tail->next=NULL;
+            break;
+        }
+        p=p->next;
+    }
+    return newhead;   //返回新链表的头指针
+}
