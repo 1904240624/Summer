@@ -1,0 +1,36 @@
+/*
+给定一点Q(a,b),和线段M的首尾两个端点P1(X1,Y1),P2(X2,Y2),要求判断点Q否在线段M上；
+*/
+#include <stdio.h>
+struct point       //定义结构体，其中x,y为点的坐标
+{
+    double x;
+    double y;
+};
+bool f(struct point P1,struct point P2,struct point Q)
+{
+    if(Q.x>=P1.x&&Q.x<=P2.x&&((P2.y-Q.y)*(Q.x-P1.x)==(Q.y-P1.y)*(P2.x-Q.x)))   //判断三点共线，且Q在两点之间
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int main()
+{
+    struct point P1,P2,Q;
+    scanf("%lf%lf",&P1.x,&P1.y);
+    scanf("%lf%lf",&P2.x,&P2.y);
+    scanf("%lf%lf",&Q.x,&Q.y);
+    if(f(P1,P2,Q))
+    {
+        printf("TRUE");
+    }
+    else
+    {
+        printf("FALSE");
+    }
+    
+}
