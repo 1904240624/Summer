@@ -1,0 +1,67 @@
+/*给定一条线段P，两端点分别为P1，P2，一个定点Q，求Q到P的最近点*/
+#include <stdio.h>
+struct point
+{
+    double x;
+    double y;
+};
+void f(struct point P1,struct point P2,struct point Q)
+{
+    if(P1.x==P2.x)    //当线段与x轴垂直
+    {
+        if(Q.y<=P1.y)   //判断点与线段的位置关系
+        {
+            printf("(%.2f,%.2f)",P1.x,P1.y);
+        }
+        else if(Q.y>=P2.y)
+        {
+            printf("(%.2f,%.2f)",P2.x,P2.y);
+        }
+        else
+        {
+            printf("(%.2f,%.2f)",P1.x,Q.y);
+        }
+    }
+    else if(P1.y==P2.y)    //当线段平行与x轴
+    {
+        if(Q.x<=P1.x)    //同上
+        {
+            printf("(%.2f,%.2f)",P1.x,P1.y);
+        }
+        else if(Q.x>=P2.x)
+        {
+            printf("(%.2f,%.2f)",P2.x,P2.y);
+        }
+        else
+        {
+            printf("(%.2f,%.2f)",Q.x,P1.y);
+        }
+    }
+    else       //一般情况
+    {
+        double k=(P2.y-P1.y)/(P2.x-P1.x);   //k为线段斜率
+        double k1=-1/k;          //k1与k垂直关系
+        double x=(P1.y-Q.y+k1*Q.x-k*P1.x)/(k1-k);    //x y分别为过点Q做垂直于线段延长线的直线与线段延长线相交交点的横纵坐标
+        double y=k*(x-P1.x)+P1.y;
+        if(x<P1.x)      //分情况讨论，判断交点是否在线段上
+        {
+            printf("(%.2f,%.2f)",P1.x,P1.y);
+        }
+        else if(x>P2.x)
+        {
+        printf("(%.2f,%.2f)",P2.x,P2.y);
+        }
+        else
+        {
+            printf("(%.2f,%.2f)",x,y);
+        }
+    }
+}
+int main()
+{
+    struct point P1,P2,Q;
+    scanf("%lf%lf",&P1.x,&P1.y);
+    scanf("%lf%lf",&P2.x,&P2.y);
+    scanf("%lf%lf",&Q.x,&Q.y);
+    f(P1,P2,Q);
+}
