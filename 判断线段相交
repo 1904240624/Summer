@@ -1,0 +1,69 @@
+/*给定两条线段P和Q，其中P1，P2为P的两端点，Q1，Q2为Q的两端点，且P2（Q2）的横坐标总是大于P1（Q1）的，判断P和Q是否相交*/
+#include <stdio.h>
+#include<stdbool.h>
+struct point       //x和y分别为点的横纵坐标
+{
+    double x;
+    double y;
+};
+bool f(struct point P1,struct point P2,struct point Q1,struct point Q2)
+{
+    //首先考虑两种特殊情况
+    if((P2.y-P1.y)*(Q2.x-Q1.x)==(P2.x-P1.x)*(Q2.y-Q1.y))     //如果两条线段平行或重合，说明不相交
+    {
+        return false;
+    }
+    if(P1.x==P2.x&&Q1.x!=Q2.x)    //如果其中一条线段垂直于x轴，则只需判断这一条线段的横坐标是否在另一条线段的横坐标区间内
+    {
+        if(Q1.x>P1.x||Q2.x<P1.x)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    if(Q1.x==Q2.x&&P1.x!=P2.x)     //同上
+    {
+        if(P1.x>Q1.x||P2.x<Q1.x)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    if(Q1.x==Q2.x&&P1.x==P2.x)  //如果都垂直于x轴
+    {
+        return false;
+    }
+    double k1=(P2.y-P1.y)/(P2.x-P1.x),k2=(Q2.y-Q1.y)/(Q2.x-Q1.x);    //k1为P的斜率，k2为Q的斜率
+    double x=(Q1.y-P1.y+k1*P1.x-k2*Q1.x)/(k1-k2);     //x为把两条线段延长后交点的横坐标
+    if(x>=P1.x&&x<=P2.x&&x>=Q1.x&&x<=Q2.x)   //如果x同时满足两条线段的横坐标区间，说明两线段相交
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int main()
+{
+    struct point P1,P2,Q1,Q2;
+    scanf("%lf%lf",&P1.x,&P1.y);
+    scanf("%lf%lf",&P2.x,&P2.y);
+    scanf("%lf%lf",&Q1.x,&Q1.y);
+    scanf("%lf%lf",&Q2.x,&Q2.y);
+    if(f(P1,P2,Q1,Q2))
+    {
+        printf("TRUE");
+    }
+    else
+    {
+        printf("FALSE");
+    }
+    
+}
