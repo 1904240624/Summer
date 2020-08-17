@@ -1,0 +1,32 @@
+/*函数printdigits应将n的每一位数字从高位到低位顺序打印出来，每位数字占一行。*/
+#include <stdio.h>
+
+void printdigits( int n );
+
+int main()
+{
+    int n;
+	
+    scanf("%d", &n);
+    printdigits(n);
+
+    return 0;
+}
+
+/* 你的代码将被嵌在这里 */
+int flag=0;  //定义标志
+void printdigits( int n )
+{
+    if(n==0&&flag==0)//   flag为0说明最开始输入的n为0
+    {
+        printf("0\n");
+        return;
+    }
+    if(n==0&&flag!=0)//当n为0且最开始输入的n不为0时终止函数
+    {
+        return;
+    }
+    flag=1;
+    printdigits(n/10);  //递归
+    printf("%d\n",n%10);
+}
