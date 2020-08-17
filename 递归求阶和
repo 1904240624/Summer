@@ -1,0 +1,42 @@
+/*本题要求实现一个计算非负整数阶乘的简单函数，并利用该函数求 1!+2!+3!+...+n! 的值。*/
+#include <stdio.h>
+
+double fact( int n );        //阶乘函数
+double factsum( int n );    //求和函数
+
+int main()
+{
+    int n;
+
+    scanf("%d",&n);
+    printf("fact(%d) = %.0f\n", n, fact(n));
+    printf("sum = %.0f\n", factsum(n));
+		
+    return 0;
+}
+
+/* 你的代码将被嵌在这里 */
+double fact( int n )
+{
+    if(n==0)    //考虑n为0的情况
+        return 1;
+    double res=n;
+    if(n>0)   //当n大于0时，运用递归
+    {
+        res*=fact(n-1);
+    }
+    return res;
+}
+double factsum( int n )
+{
+    if(n==0)  //考虑n为0
+    {
+        return 0;
+    }
+    double res=fact(n);
+    if(n>0)    //递归
+    {
+        res+=factsum(n-1);
+    }
+    return res;
+}
