@@ -1,0 +1,27 @@
+
+/*本题要求实现一个用递归计算1+2+3+…+n的和的简单函数。*/
+#include <stdio.h>
+
+int sum( int n );
+
+int main()
+{
+    int n;
+
+    scanf("%d", &n);
+    printf ("%d\n", sum(n));
+
+    return 0;
+}
+
+/* 你的代码将被嵌在这里 */
+int sum( int n )
+{
+    if(n<=0)
+    {
+        return 0;
+    }
+    int res=n;
+    res+=sum(n-1);//递归
+    return res;
+}
