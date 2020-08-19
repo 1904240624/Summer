@@ -1,0 +1,32 @@
+#include <stdio.h>
+#define N 10
+int max(int a,int b);
+int f(int *num);
+int main(void) 
+{
+    int num[N],i;
+    for(i=0;i<N;i++)
+    {
+        scanf("%d",&num[i]);
+    }
+    printf("%d",f(num));
+}
+int f(int *num)
+{
+    int i,res,dp[10000];
+    dp[0]=num[0];
+    res=dp[0];
+    for(i=1;i<N;i++)
+    {
+        dp[i]=max(num[i],dp[i-1]+num[i]);   //动态规划
+        res=max(dp[i],res);
+    }
+    return res;
+}
+int max(int a,int b)    //比较两个数，取最大值
+{
+    if(a>b)
+        return a;
+    else
+        return b;
+}
