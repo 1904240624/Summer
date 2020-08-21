@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define N 5
+int compare(const void *a,const void *b) {
+    return (*(int*)a-*(int*)b);
+}
+int main()
+{
+    int nums[N];
+    for(int i=0;i<N;i++)
+    {
+        scanf("%d",&nums[i]);
+    }
+    qsort(nums,N,sizeof(int),compare);  //库函数
+    for(int i=0;i<N;i++)
+    {
+        printf("%4d",nums[i]);
+    }
+}
