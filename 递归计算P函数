@@ -1,0 +1,35 @@
+/*本题要求实现下列函数P(n,x)的计算：*/
+
+#include <stdio.h>
+
+double P( int n, double x );
+
+int main()
+{
+    int n;
+    double x;
+
+    scanf("%d %lf", &n, &x);
+    printf("%.2f\n", P(n,x));
+
+    return 0;
+}
+
+/* 你的代码将被嵌在这里 */
+double P( int n, double x )
+{
+    double res;
+    if(n==0)
+    {
+        res=1;
+    }
+    if(n==1)
+    {
+        res=x;
+    }
+    if(n>1)
+    {
+        res=((2*n-1)*P(n-1,x)-(n-1)*P(n-2,x))/n;
+    }
+    return res;
+}
